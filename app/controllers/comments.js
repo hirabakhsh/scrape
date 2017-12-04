@@ -1,8 +1,6 @@
 var db = require('../models');
 var moment = require('moment');
-
 module.exports = function(app) {
-
   app.get('/comments/:id', function(req, res) {
 
     db.Article.find({"_id": req.params.id })

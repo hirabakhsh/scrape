@@ -4,8 +4,6 @@ var request = require('request');
 var moment = require('moment');
 
 module.exports = function(app) {
-
-  // Default route
   app.get('/', function(req, res) {
 
     db.Article
@@ -14,8 +12,6 @@ module.exports = function(app) {
         res.render('index', { data: dbArticle});
       })
   })
-
-  // When the 'Fetch Articles' button is clicked
   app.post('/', function(req, res) {
 
     request('https://news.ycombinator.com/', function(error, response, body) {
@@ -48,13 +44,8 @@ module.exports = function(app) {
     })
 
   })
-
-  // When the 'Delete Articles' button is clicked
-  // TODO: Delete comments for the articles as well
   app.post('/delete', function(req, res) {
-
     console.log(req.body.id);
-
     if (req.body.id) {
       db.Article
         .remove({ _id: req.body.id })
